@@ -10,10 +10,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@gluestack-style/babel-plugin-styled-resolver": "^0.2.6",
+    "@gluestack-style/react": "^0.2.51",
+    "@gluestack-ui/themed": "^0.1.51",
     "expo": "~49.0.11",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
-    "react-native": "0.72.4"
+    "react-native": "0.72.4",
+    "react-native-svg": "13.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
