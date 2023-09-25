@@ -1,6 +1,20 @@
 import React from 'react'
 
-import { BottomSheetContext } from '../contexts'
+import { BottomSheetContext, BottomSheetPropsContext } from '../contexts'
+
+const BottomSheetPropsProvider = ({ children }) => {
+  const [state, setState] = React.useState()
+
+  const value = React.useMemo(() => {
+    return { state, setState }
+  }, [state, setState])
+
+  return (
+    <BottomSheetPropsContext.Provider value={value}>
+      {children}
+    </BottomSheetPropsContext.Provider>
+  )
+}
 
 export const BottomSheetProvider = ({ children }) => {
   const initState = {
@@ -28,5 +42,9 @@ export const BottomSheetProvider = ({ children }) => {
     }
   }, [state, toggleVisible])
 
-  return <BottomSheetContext.Provider value={value} children={children} />
+  return (
+    <BottomSheetContext.Provider value={value}>
+      <BottomSheetPropsProvider>{children}</BottomSheetPropsProvider>
+    </BottomSheetContext.Provider>
+  )
 }
