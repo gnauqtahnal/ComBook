@@ -1,11 +1,16 @@
 import React from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
+import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
   FadeIn,
   FadeOut,
   SlideInDown,
   SlideOutDown,
+  runOnJS,
   useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
 } from 'react-native-reanimated'
 
 import { WINDOW_HEIGHT } from '../contants'
@@ -36,22 +41,60 @@ const BottomSheetDragHandler = React.memo(() => {
 })
 
 const BottomSheetContainer = React.memo(({ children }) => {
+  const { state, toggleVisible } = useBottomSheet()
+  const translateY = useSharedValue(0)
+  const rStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: translateY.value }],
+    }
+  })
+
+  React.useEffect(() => {
+    if (state.visible === false) {
+      translateY.value = 0
+    }
+  }, [state.visible])
+
+  const gesture = Gesture.Pan()
+    .onChange((event) => {
+      translateY.value = Math.max(-150, event.translationY)
+    })
+    .onFinalize(() => {
+      if (translateY.value < WINDOW_HEIGHT / 4) {
+        translateY.value = withSpring(0)
+      } else {
+        runOnJS(toggleVisible)
+        translateY.value = withTiming(
+          WINDOW_HEIGHT,
+          {
+            duration: 300,
+            delay: 0,
+          },
+          () => {
+            runOnJS(toggleVisible)()
+          }
+        )
+      }
+    })
+
   return (
-    <Animated.View
-      style={styles.container}
-      entering={SlideInDown}
-      exiting={SlideOutDown}
-    >
-      <BottomSheetDragHandler />
-      {children}
-    </Animated.View>
+    <GestureDetector gesture={gesture}>
+      <Animated.View
+        style={[styles.container, rStyle]}
+        entering={SlideInDown}
+        exiting={SlideOutDown}
+      >
+        <BottomSheetDragHandler />
+        {children}
+      </Animated.View>
+    </GestureDetector>
   )
 })
 
 export const BottomSheet = React.memo(() => {
   const { state } = useBottomSheet()
 
-  if (state.visible) {
+  if (!state.visible) {
     return null
   }
 
