@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { BottomSheetProvider } from './src/components/BottomSheet';
-import HomeScreen from './src/screens/home';
+import { HomeScreen } from './src/screens';
 
 export default function App() {
   return (
