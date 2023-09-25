@@ -91,7 +91,7 @@ const BottomSheetContainer = React.memo(({ children }) => {
   )
 })
 
-export const BottomSheet = React.memo(() => {
+export const BottomSheet = React.memo(({ children }) => {
   const { state } = useBottomSheet()
 
   if (!state.visible) {
@@ -101,7 +101,7 @@ export const BottomSheet = React.memo(() => {
   return (
     <>
       <BottomSheetScrim />
-      <BottomSheetContainer />
+      <BottomSheetContainer children={children} />
     </>
   )
 })
