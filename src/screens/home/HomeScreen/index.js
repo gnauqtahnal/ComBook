@@ -1,27 +1,19 @@
-import React from 'react'
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import {
   BottomSheet,
-  BottomSheetProvider,
-  useBottomSheet,
-} from '../../../components/bottom-sheet'
+  useBottomSheetVisible,
+} from '../../../components/BottomSheet';
 
 const ButtonToggleBottomSheet = React.memo(() => {
-  const { toggleVisible } = useBottomSheet()
+  const { toggleVisible } = useBottomSheetVisible();
 
   return (
     <TouchableOpacity
       onPress={() => {
-        toggleVisible()
-      }}
-    >
+        toggleVisible();
+      }}>
       <View
         style={{
           width: 50,
@@ -32,27 +24,25 @@ const ButtonToggleBottomSheet = React.memo(() => {
         }}
       />
     </TouchableOpacity>
-  )
-})
+  );
+});
 
-const HomeScreenComponent = () => {
+const HomeScreen = () => {
   return (
-    <BottomSheetProvider>
-      <SafeAreaView style={styles.safearea}>
-        <View style={styles.container}>
-          <Text>This is home screen</Text>
-          <ButtonToggleBottomSheet />
-        </View>
-      </SafeAreaView>
+    <>
+      <View style={styles.container}>
+        <Text>This is home screen</Text>
+        <ButtonToggleBottomSheet />
+      </View>
 
-      <BottomSheet />
-    </BottomSheetProvider>
-  )
-}
+      <BottomSheet>
+        <Text>This is bottom sheet</Text>
+      </BottomSheet>
+    </>
+  );
+};
 
-const HomeScreen = HomeScreenComponent
-
-export default HomeScreen
+export default HomeScreen;
 
 export const styles = StyleSheet.create({
   safearea: {
@@ -64,4 +54,4 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-})
+});
