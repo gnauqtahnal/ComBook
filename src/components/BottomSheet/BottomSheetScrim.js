@@ -18,7 +18,8 @@ const BottomSheetScrim = ({ children }) => {
       style={styles.scrim}
       onPress={onPress}
       entering={FadeIn}
-      exiting={FadeOut}>
+      exiting={FadeOut}
+    >
       {children}
     </AnimatedPressable>
   );

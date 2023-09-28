@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BottomSheet } from '../../../components/BottomSheet';
+import BottomSheet from '../../../components/BottomSheet';
 import SubmitButton from './SubmitButton';
 
 const CardPropsBottomSheet = () => {

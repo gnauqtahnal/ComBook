@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
+  runOnJS,
   SlideInDown,
   SlideOutDown,
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -36,8 +36,8 @@ const BottomSheetContainer = ({ containerStyle, children }) => {
       translateY.value = Math.max(-150, event.translationY);
     })
     .onFinalize(() => {
-      if (translateY.value < WINDOW_HEIGHT / 4) {
-        translateY.value = withSpring(0);
+      if (translateY.value < 150) {
+        translateY.value = withSpring(0, { damping: 50 });
       } else {
         runOnJS(toggleVisible);
         translateY.value = withTiming(
@@ -58,7 +58,8 @@ const BottomSheetContainer = ({ containerStyle, children }) => {
       <Animated.View
         style={[styles.container, animatedStyle, containerStyle]}
         entering={SlideInDown}
-        exiting={SlideOutDown}>
+        exiting={SlideOutDown}
+      >
         {children}
       </Animated.View>
     </GestureDetector>
