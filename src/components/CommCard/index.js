@@ -1,0 +1,1 @@
+export { CommCardContainer } from './CommCardContainer';
