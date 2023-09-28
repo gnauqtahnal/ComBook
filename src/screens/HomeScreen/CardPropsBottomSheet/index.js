@@ -1,36 +1,45 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import BottomSheet from '../../../components/BottomSheet';
-import CommCardContainer from '../../../components/CommCard';
+import {
+  BottomSheetContainer,
+  BottomSheetDragHandler,
+  BottomSheetScrim,
+  useBottomSheetVisible,
+} from '../../../components/BottomSheet';
 import CameraPickerButton from './CameraPickerButton';
+import CommCardPreview from './CommCardPreview';
 import LibraryPickerButton from './LibraryPickerButton';
 import SubmitButton from './SubmitButton';
 
-const CommCardPreview = () => {
-  return (
-    <CommCardContainer
-      containerStyle={styles.previewContainer}
-    ></CommCardContainer>
-  );
-};
-
 const CardPropsBottomSheet = () => {
+  const { visible } = useBottomSheetVisible();
+
+  if (!visible) {
+    return null;
+  }
+
   return (
-    <BottomSheet>
-      <CommCardPreview />
-      <CameraPickerButton />
-      <LibraryPickerButton />
-      <SubmitButton />
-    </BottomSheet>
+    <>
+      <BottomSheetScrim containerStyle={styles.container}>
+        <CommCardPreview />
+      </BottomSheetScrim>
+
+      <BottomSheetContainer>
+        <BottomSheetDragHandler />
+        <CameraPickerButton />
+        <LibraryPickerButton />
+        <SubmitButton />
+      </BottomSheetContainer>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  previewContainer: {
-    position: 'absolute',
-    top: 0,
-    backgroundColor: '#ffffff',
+  container: {
+    paddingTop: 100,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
 });
 

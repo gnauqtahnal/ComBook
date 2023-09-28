@@ -6,7 +6,7 @@ import { useBottomSheetVisible } from './hooks';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-const BottomSheetScrim = ({ children }) => {
+const BottomSheetScrim = ({ containerStyle, children }) => {
   const { toggleVisible } = useBottomSheetVisible();
 
   const onPress = React.useCallback(() => {
@@ -15,7 +15,7 @@ const BottomSheetScrim = ({ children }) => {
 
   return (
     <AnimatedPressable
-      style={styles.scrim}
+      style={[styles.scrim, containerStyle]}
       onPress={onPress}
       entering={FadeIn}
       exiting={FadeOut}

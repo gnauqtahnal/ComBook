@@ -1,1 +1,1 @@
-export { default } from './CommCardContainer';
+export { default as CommCardContainer } from './CommCardContainer';
