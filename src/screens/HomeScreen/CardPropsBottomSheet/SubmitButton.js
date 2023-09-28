@@ -5,7 +5,7 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 const SubmitButton = React.memo(({ containerStyle, onPress }) => {
   return (
     <TouchableHighlight
-      onPress={() => {}}
+      onPress={onPress}
       style={[styles.container, containerStyle]}
       underlayColor="#cccccc"
     >
@@ -13,13 +13,11 @@ const SubmitButton = React.memo(({ containerStyle, onPress }) => {
         <View style={styles.iconContainer}>
           <FontAwesome name="send" size={22} color="black" />
         </View>
-        <Text>Submit Button</Text>
+        <Text style={styles.text}>Xong</Text>
       </View>
     </TouchableHighlight>
   );
 });
-
-export default SubmitButton;
 
 const styles = StyleSheet.create({
   container: {
@@ -31,10 +29,18 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   iconContainer: {
     padding: 10,
     borderRadius: 9999,
     backgroundColor: '#dddddd',
+    marginRight: 10,
+  },
+  text: {
+    fontSize: 24,
   },
 });
+
+export default SubmitButton;
