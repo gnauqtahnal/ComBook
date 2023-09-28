@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-export const CommCardContainer = ({ containerStyle, children }) => {
+const CommCardContainer = ({ containerStyle, children }) => {
   return <View style={[styles.container, containerStyle]}>{children}</View>;
 };
 
@@ -15,3 +15,5 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 });
+
+export default CommCardContainer;
