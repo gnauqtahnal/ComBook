@@ -5,25 +5,17 @@ import Animated, {
   runOnJS,
   SlideInDown,
   SlideOutDown,
-  useAnimatedStyle,
-  useSharedValue,
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
 
 import { WINDOW_HEIGHT } from './contants';
-import { useBottomSheetVisible } from './hooks';
+import { useBottomSheetContainer, useBottomSheetVisible } from './hooks';
 
 const BottomSheetContainer = ({ containerStyle, children }) => {
   const { visible, toggleVisible } = useBottomSheetVisible();
 
-  const translateY = useSharedValue(0);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateY: translateY.value }],
-    };
-  });
+  const { translateY, animatedStyle } = useBottomSheetContainer();
 
   React.useEffect(() => {
     if (visible === false) {
@@ -33,10 +25,10 @@ const BottomSheetContainer = ({ containerStyle, children }) => {
 
   const gesture = Gesture.Pan()
     .onChange((event) => {
-      translateY.value = Math.max(-150, event.translationY);
+      translateY.value = Math.max(0, event.translationY);
     })
     .onFinalize(() => {
-      if (translateY.value < 150) {
+      if (translateY.value < 100) {
         translateY.value = withSpring(0, { damping: 50 });
       } else {
         runOnJS(toggleVisible);
@@ -71,11 +63,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: '100%',
-    height: WINDOW_HEIGHT,
     borderRadius: 16,
     backgroundColor: 'white',
     ...StyleSheet.absoluteFillObject,
     top: WINDOW_HEIGHT / 2,
+    overflow: 'hidden',
   },
 });
 

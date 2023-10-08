@@ -1,11 +1,18 @@
 import React from 'react';
+import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
-import { BottomSheetPropsContext, BottomSheetVisibleContext } from './contexts';
+import {
+  BottomSheetContainerContext,
+  BottomSheetPropsContext,
+  BottomSheetVisibleContext,
+} from './contexts';
 
 const BottomSheetProvider = ({ children }) => {
   return (
     <BottomSheetVisibleProvider>
-      <BottomSheetPropsProvider>{children}</BottomSheetPropsProvider>
+      <BottomSheetPropsProvider>
+        <BottomSheetContainerProvider>{children}</BottomSheetContainerProvider>
+      </BottomSheetPropsProvider>
     </BottomSheetVisibleProvider>
   );
 };
@@ -44,6 +51,29 @@ const BottomSheetPropsProvider = ({ children }) => {
     <BottomSheetPropsContext.Provider value={value}>
       {children}
     </BottomSheetPropsContext.Provider>
+  );
+};
+
+const BottomSheetContainerProvider = ({ children }) => {
+  const translateY = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: translateY.value }],
+    };
+  });
+
+  const value = React.useMemo(() => {
+    return {
+      translateY,
+      animatedStyle,
+    };
+  }, [translateY]);
+
+  return (
+    <BottomSheetContainerContext.Provider value={value}>
+      {children}
+    </BottomSheetContainerContext.Provider>
   );
 };
 

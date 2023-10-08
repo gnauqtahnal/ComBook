@@ -2,22 +2,24 @@ import { FontAwesome } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
-const CameraPickerButton = React.memo(({ containerStyle, onPress }) => {
-  return (
-    <TouchableHighlight
-      onPress={onPress}
-      style={[styles.container, containerStyle]}
-      underlayColor="#cccccc"
-    >
-      <View style={styles.wrapper}>
-        <View style={styles.iconContainer}>
-          <FontAwesome name="camera" size={22} color="black" />
+const CameraPickerButton = React.memo(
+  ({ containerStyle, onPress = () => {} }) => {
+    return (
+      <TouchableHighlight
+        onPress={onPress}
+        style={[styles.container, containerStyle]}
+        underlayColor="#cccccc"
+      >
+        <View style={styles.wrapper}>
+          <View style={styles.iconContainer}>
+            <FontAwesome name="camera" size={22} color="white" />
+          </View>
+          <Text style={styles.text}>Chọn ảnh từ Camera</Text>
         </View>
-        <Text style={styles.text}>Chọn ảnh từ Camera</Text>
-      </View>
-    </TouchableHighlight>
-  );
-});
+      </TouchableHighlight>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -35,8 +37,8 @@ const styles = StyleSheet.create({
   iconContainer: {
     padding: 10,
     borderRadius: 9999,
-    backgroundColor: '#dddddd',
-    marginRight: 10,
+    backgroundColor: 'black',
+    marginRight: 20,
   },
   text: {
     fontSize: 22,

@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { BottomSheetPropsContext, BottomSheetVisibleContext } from './contexts';
+import {
+  BottomSheetContainerContext,
+  BottomSheetPropsContext,
+  BottomSheetVisibleContext,
+} from './contexts';
 
 export const useBottomSheetVisible = () => {
   return React.useContext(BottomSheetVisibleContext);
@@ -8,4 +12,8 @@ export const useBottomSheetVisible = () => {
 
 export const useBottomSheetProps = () => {
   return React.useContext(BottomSheetPropsContext);
+};
+
+export const useBottomSheetContainer = () => {
+  return React.useContext(BottomSheetContainerContext);
 };

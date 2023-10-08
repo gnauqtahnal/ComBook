@@ -2,22 +2,24 @@ import { FontAwesome } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
-const LibraryPickerButton = React.memo(({ containerStyle, onPress }) => {
-  return (
-    <TouchableHighlight
-      onPress={onPress}
-      style={[styles.container, containerStyle]}
-      underlayColor="#cccccc"
-    >
-      <View style={styles.wrapper}>
-        <View style={styles.iconContainer}>
-          <FontAwesome name="photo" size={22} color="black" />
+const LibraryPickerButton = React.memo(
+  ({ containerStyle, onPress = () => {} }) => {
+    return (
+      <TouchableHighlight
+        onPress={onPress}
+        style={[styles.container, containerStyle]}
+        underlayColor="#cccccc"
+      >
+        <View style={styles.wrapper}>
+          <View style={styles.iconContainer}>
+            <FontAwesome name="photo" size={22} color="white" />
+          </View>
+          <Text style={styles.text}>Chọn ảnh từ Thư Viện</Text>
         </View>
-        <Text style={styles.text}>Chọn ảnh từ Thư Viện</Text>
-      </View>
-    </TouchableHighlight>
-  );
-});
+      </TouchableHighlight>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -35,8 +37,8 @@ const styles = StyleSheet.create({
   iconContainer: {
     padding: 10,
     borderRadius: 9999,
-    backgroundColor: '#dddddd',
-    marginRight: 10,
+    backgroundColor: 'black',
+    marginRight: 20,
   },
   text: {
     fontSize: 22,

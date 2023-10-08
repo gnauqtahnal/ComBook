@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { useBottomSheetVisible } from '../../components/BottomSheet';
-import CardPropsButtomSheet from './CardPropsBottomSheet';
+import ImagePickerBottomSheet from './CardPropsBottomSheet';
 
 const ButtonToggleBottomSheet = React.memo(() => {
   const { toggleVisible } = useBottomSheetVisible();
@@ -19,28 +19,9 @@ const ButtonToggleBottomSheet = React.memo(() => {
           height: 50,
           margin: 5,
           borderRadius: 999,
-          backgroundColor: 'red',
+          backgroundColor: 'gray',
         }}
       />
-    </TouchableOpacity>
-  );
-});
-
-const ButtonSubmit = React.memo(() => {
-  return (
-    <TouchableOpacity
-      style={{
-        width: '100%',
-        height: 40,
-        margin: 10,
-        padding: 5,
-        borderWidth: 1,
-        borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>XONG</Text>
     </TouchableOpacity>
   );
 });
@@ -49,11 +30,10 @@ const HomeScreen = () => {
   return (
     <>
       <View style={styles.container}>
-        <Text>This is home screen</Text>
         <ButtonToggleBottomSheet />
       </View>
 
-      <CardPropsButtomSheet />
+      <ImagePickerBottomSheet />
     </>
   );
 };
